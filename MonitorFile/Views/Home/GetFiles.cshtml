@@ -1,0 +1,28 @@
+﻿
+@model IEnumerable<MonitorFile.Models.FileDetails>
+<table id="tblFile" class="table table-responsive">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>File Name</th>
+            <th>File Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int index = 1;}
+        @if (Model != null)
+        {
+            @foreach (var Info in Model)
+            {
+
+                <tr>
+                    <td>@index</td>
+                    <td>@Info.Name</td>
+                    <td>@Info.FileType</td>
+                </tr>
+                index = index + 1;
+            }
+        }
+
+    <tbody>
+</table>

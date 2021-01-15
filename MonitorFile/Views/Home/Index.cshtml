@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h3>List Files</h3>
+<hr />
+<div id="Divfile"></div>
+
+
+@section Scripts{
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script>
+        $(() => {
+            let connection = new signalR.HubConnectionBuilder().withUrl("/FileWatcherHub").build()
+            connection.start()
+            connection.on("Refreshfilewatcher", function () {
+                UpdateUI()
+            });
+            UpdateUI();
+            function UpdateUI() {
+                const url = '/Home/GetFiles';
+                $.get(url).then(res => {
+                    $("#Divfile").html(res);
+                });
+            }
+        })
+    </script>
+}
